@@ -4,92 +4,107 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/rgb.h>
-#include <dt-bindings/zmk/ext_power.h>
+#include <behaviors.dtsi>                   // 標準のビヘイビア定義（hold-tapなど）
+#include <dt-bindings/zmk/bt.h>             // Bluetooth関連のバインディング（BT_SEL など）
+#include <dt-bindings/zmk/keys.h>           // キーコード定義（A, B, C, ENTERなど）
+#include <dt-bindings/zmk/rgb.h>            // RGB関連のバインディング（RGB_TOGなど）
+#include <dt-bindings/zmk/ext_power.h>      // 外部電源制御（EP_TOGなど）
 / {
     behaviors {
+        // ホームポジションモディファイア用ビヘイビア定義
+        // タップ時は通常キー、長押し時はモディファイアとして動作
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick_tap_ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-
-            quick-tap-ms = <180>;
-            global-quick-tap;
+            tapping-term-ms = <200>;        // ホールドと判定されるまでの時間（ms）
+            quick_tap_ms = <0>;             // クイックタップの判定時間（0は無効）
+            flavor = "tap-preferred";       // タップ優先（holdよりtapを優先）
+            bindings = <&kp>, <&kp>;        // 第1引数: tap時のキー、第2引数: hold時のキー
+            quick-tap-ms = <180>;           // クイックタップを180msで有効化（旧形式の互換性？）
+            global-quick-tap;               // グローバルにクイックタップを有効
         };
-
+        // &ltq: Layer Tap（タップでキー、ホールドでレイヤー切り替え）＋クイックタップ対応
         ltq: ltq {
             compatible = "zmk,behavior-hold-tap";
             label = "LTQ";
-            bindings = <&mo>, <&kp>;
-
+            bindings = <&mo>, <&kp>;        // mo: hold時に移動するレイヤー、kp: tap時のキー
             #binding-cells = <2>;
-            tapping-term-ms = <600>;
+            tapping-term-ms = <600>;        // 長めのホールド判定時間（ms）
             global-quick-tap;
-            quick-tap-ms = <400>;
+            quick-tap-ms = <400>;           // クイックタップ有効化
         };
     };
 
     combos {
         compatible = "zmk,combos";
 
+        // Q + W → [
         left_bkt {
             bindings = <&kp LEFT_BRACKET>;
-            key-positions = <4 3>;
+            key-positions = <4 3>; // Q(4) + W(3)
             timeout-ms = <50>;
         };
 
+        // O + P → ]
         right_bkt {
             bindings = <&kp RBKT>;
-            key-positions = <7 8>;
+            key-positions = <7 8>; // O(7) + P(8)
             timeout-ms = <50>;
         };
 
+        // S + D → (
         left_par {
             bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <15 16>;
+            key-positions = <15 16>; // S(15) + D(16)
             timeout-ms = <50>;
         };
 
+        // K + L → )
         right_par {
             bindings = <&kp RIGHT_PARENTHESIS>;
-            key-positions = <19 20>;
+            key-positions = <19 20>; // K(19) + L(20)
             timeout-ms = <50>;
         };
 
+        // X + C → {
         left_brace {
             bindings = <&kp LEFT_BRACE>;
-            key-positions = <27 28>;
+            key-positions = <27 28>; // X(27) + C(28)
             timeout-ms = <50>;
         };
 
+        // . + / → }
         right_brace {
             bindings = <&kp RIGHT_BRACE>;
-            key-positions = <32 31>;
+            key-positions = <32 31>; // .(32) + /(31)
             timeout-ms = <50>;
         };
 
+        // E + R → \
         bac {
             bindings = <&kp BACKSLASH>;
-            key-positions = <5 6>;
+            key-positions = <5 6>; // E(5) + R(6)
         };
 
+        // D + F → |
         pipe {
             bindings = <&kp PIPE>;
-            key-positions = <17 18>;
+            key-positions = <17 18>; // D(17) + F(18)
         };
     };
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// |  TAB |  Q          |  W        |  E     |  R        |  T    |   |  Y  |  U     |  I    |  O        |  P   | BKSP |
+// | CTRL |  A LEFT_GUI | S LEFT_ALT|D LCTRL|F LEFT_SHIFT|  G    |   |  H  |J RSHIFT|K RCTRL|L RIGHT_ALT|; RGUI|  '   |
+// | SHFT |  Z          |  X        |  C     |  V        |  B    |   |  N  |  M     |  ,    |  .        |  /   | ESC  |
+//                                           | TAB | SPC |ENT LWR|   | RSE | BKSP LWR | BKSP |
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// &mo 3 -> layer 3
+
             bindings = <
 &kp TAB    &kp Q           &kp W           &kp E        &kp R             &kp T        &kp Y  &kp U             &kp I          &kp O            &kp P               &kp BSPC
 &kp LCTRL  &hm LEFT_GUI A  &hm LEFT_ALT S  &hm LCTRL D  &hm LEFT_SHIFT F  &kp G        &kp H  &hm RSHIFT J      &hm RCTRL K    &hm RIGHT_ALT L  &hm RGUI SEMICOLON  &kp SQT
@@ -99,6 +114,15 @@
         };
 
         lower_layer {
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// |  TAB  |  1          |  2        |  3     |  4        |  5    |   |  6  |  7     |  8    |  9        |  0   | BKSP |
+// | bootl | RGB_TOG     | 未使用   |未使用 |未使用     |  F12  |   |  -  |   =     |  `    |未使用     |  '   |未使用 |
+// | EP_TOG| 未使用      | 未使用   |未使用 |未使用     |未使用 |   |未使用| 未使用 |  ,    |  .        |  /   |未使用 |
+//                                    | TAB | SPC |ENT LWR|   | RSE | BKSP LWR | BKSP |
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// &bootloader: ブートローダーモードに入るキー（ファーム更新用）
+// &rgb_ug RGB_TOG: RGBライティングのトグル
+// &ext_power EP_TOG: 外部電源のトグル（例：Bluetoothモジュール用）
             bindings = <
 &kp TAB      &kp N1  &kp N2  &kp N3  &kp N4  &kp N5   &kp N6     &kp N7           &kp N8     &kp N9  &kp N0   &kp BSPC
 &bootloader  &rgb_ug RGB_TOG  &trans  &trans  &trans  &kp F12  &kp MINUS  &kp EQUAL        &kp GRAVE  &trans  &kp SQT  &trans
@@ -108,6 +132,15 @@
         };
 
         raise_layer {
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// |        | ESC |  KP7   |  KP8   |  KP9   |  KP0   |   | HOME |        |  ↑    |        |        |        |
+// |        | CAPS|  KP4   |  KP5   |  KP6   |  @     |   | END  | ←      |  ↓    |  →     |        |        |
+// |        | DEL |  KP1   |  KP2   |  KP3   |  .     |   |      |        |        |        |        |        |
+//                          |        |        |        |        |        |        |
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// 数字テンキーとナビゲーションキーを含むレイヤー
+// &kp KP_NUMBER_X: テンキー風の数字入力
+// &kp HOME/END/CAPS/DELETE など: 基本的な編集・ナビゲーション操作
             bindings = <
 &trans  &kp ESC     &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0  &kp HOME  &trans    &kp UP    &trans     &trans  &trans
 &trans  &kp CAPS    &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp AT           &kp END   &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans
@@ -117,6 +150,16 @@
         };
 
         layer_3 {
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// |        | BT0 | BT1 | BT2 | BT3 |        |        |        |        |        |        |        |
+// |        | CLR |     |     |     |        |        |        |        |        |        |        |
+// |        |     |     |     |     |        |        |        |        |        |        |        |
+//                          |        |        |        |        |        |        |
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// Bluetoothレイヤー
+// &bt BT_SEL n: Bluetoothプロファイル n を選択（n = 0〜4）
+// &bt BT_CLR: Bluetoothペアリング情報のクリア
+
             bindings = <
 &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &bt BT_CLR    &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans
