@@ -168,16 +168,16 @@
             >;
         };
         extra1 {
-            status = "reserved";
+            status = "disabled";
         };
         extra2 {
-            status = "reserved";
+            status = "disabled";
         };
         extra3 {
-            status = "reserved";
+            status = "disabled";
         };
         extra4 {
-            status = "reserved";
+            status = "disabled";
         };
 
     };
