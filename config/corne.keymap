@@ -167,18 +167,19 @@
                                     &trans        &trans        &trans  &trans  &trans  &trans
             >;
         };
-        extra1 {
-            status = "disabled";
-        };
-        extra2 {
-            status = "disabled";
-        };
-        extra3 {
-            status = "disabled";
-        };
-        extra4 {
-            status = "disabled";
-        };
-
+/*
+ *        extra1 {
+ *            status = "disabled";
+ *        };
+ *        extra2 {
+ *            status = "disabled";
+ *        };
+ *        extra3 {
+ *            status = "disabled";
+ *        };
+ *        extra4 {
+ *            status = "disabled";
+ *        };
+*/
     };
 };
