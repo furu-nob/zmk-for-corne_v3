@@ -112,42 +112,42 @@
 //                                            &kp TAB      &lt 1 SPACE       &lt 2 ENTER  &mo 3  &lt 2 BACKSPACE  &kp BACKSPACE
 //             >;
 //         };
-
-        lower_layer {
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-// |  TAB  |  1          |  2        |  3     |  4        |  5    |   |  6  |  7     |  8    |  9        |  0   | BKSP |
-// | bootl | RGB_TOG     | 未使用   |未使用 |未使用     |  F12  |   |  -  |   =     |  `    |未使用     |  '   |未使用 |
-// | EP_TOG| 未使用      | 未使用   |未使用 |未使用     |未使用 |   |未使用| 未使用 |  ,    |  .        |  /   |未使用 |
-//                                    | TAB | SPC |ENT LWR|   | RSE | BKSP LWR | BKSP |
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-// &bootloader: ブートローダーモードに入るキー（ファーム更新用）
-// &rgb_ug RGB_TOG: RGBライティングのトグル
-// &ext_power EP_TOG: 外部電源のトグル（例：Bluetoothモジュール用）
-            bindings = <
-&kp TAB      &kp N1  &kp N2  &kp N3  &kp N4  &kp N5   &kp N6     &kp N7           &kp N8     &kp N9  &kp N0   &kp BSPC
-&bootloader  &rgb_ug RGB_TOG  &trans  &trans  &trans  &kp F12  &kp MINUS  &kp EQUAL        &kp GRAVE  &trans  &kp SQT  &trans
-&ext_power EP_TOG       &trans  &trans  &trans  &trans  &trans   &trans     &trans           &trans     &trans  &trans   &trans
-                             &trans  &trans  &trans   &trans     &kp RIGHT_SHIFT  &trans
-            >;
-        };
-
-        raise_layer {
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-// |        | ESC |  KP7   |  KP8   |  KP9   |  KP0   |   | HOME |        |  ↑    |        |        |        |
-// |        | CAPS|  KP4   |  KP5   |  KP6   |  @     |   | END  | ←      |  ↓    |  →     |        |        |
-// |        | DEL |  KP1   |  KP2   |  KP3   |  .     |   |      |        |        |        |        |        |
-//                          |        |        |        |        |        |        |
-// -------------------------------------------------------------------------------------------------------------------------------------------------
-// 数字テンキーとナビゲーションキーを含むレイヤー
-// &kp KP_NUMBER_X: テンキー風の数字入力
-// &kp HOME/END/CAPS/DELETE など: 基本的な編集・ナビゲーション操作
-            bindings = <
-&trans  &kp ESC     &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0  &kp HOME  &trans    &kp UP    &trans     &trans  &trans
-&trans  &kp CAPS    &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp AT           &kp END   &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans
-&trans  &kp DELETE  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp DOT          &trans    &trans    &trans    &trans     &trans  &trans
-                                     &trans           &trans           &trans           &trans    &trans    &trans
-            >;
-        };
+// 
+//         lower_layer {
+// // -------------------------------------------------------------------------------------------------------------------------------------------------
+// // |  TAB  |  1          |  2        |  3     |  4        |  5    |   |  6  |  7     |  8    |  9        |  0   | BKSP |
+// // | bootl | RGB_TOG     | 未使用   |未使用 |未使用     |  F12  |   |  -  |   =     |  `    |未使用     |  '   |未使用 |
+// // | EP_TOG| 未使用      | 未使用   |未使用 |未使用     |未使用 |   |未使用| 未使用 |  ,    |  .        |  /   |未使用 |
+// //                                    | TAB | SPC |ENT LWR|   | RSE | BKSP LWR | BKSP |
+// // -------------------------------------------------------------------------------------------------------------------------------------------------
+// // &bootloader: ブートローダーモードに入るキー（ファーム更新用）
+// // &rgb_ug RGB_TOG: RGBライティングのトグル
+// // &ext_power EP_TOG: 外部電源のトグル（例：Bluetoothモジュール用）
+//             bindings = <
+// &kp TAB      &kp N1  &kp N2  &kp N3  &kp N4  &kp N5   &kp N6     &kp N7           &kp N8     &kp N9  &kp N0   &kp BSPC
+// &bootloader  &rgb_ug RGB_TOG  &trans  &trans  &trans  &kp F12  &kp MINUS  &kp EQUAL        &kp GRAVE  &trans  &kp SQT  &trans
+// &ext_power EP_TOG       &trans  &trans  &trans  &trans  &trans   &trans     &trans           &trans     &trans  &trans   &trans
+//                              &trans  &trans  &trans   &trans     &kp RIGHT_SHIFT  &trans
+//             >;
+//         };
+// 
+//         raise_layer {
+// // -------------------------------------------------------------------------------------------------------------------------------------------------
+// // |        | ESC |  KP7   |  KP8   |  KP9   |  KP0   |   | HOME |        |  ↑    |        |        |        |
+// // |        | CAPS|  KP4   |  KP5   |  KP6   |  @     |   | END  | ←      |  ↓    |  →     |        |        |
+// // |        | DEL |  KP1   |  KP2   |  KP3   |  .     |   |      |        |        |        |        |        |
+// //                          |        |        |        |        |        |        |
+// // -------------------------------------------------------------------------------------------------------------------------------------------------
+// // 数字テンキーとナビゲーションキーを含むレイヤー
+// // &kp KP_NUMBER_X: テンキー風の数字入力
+// // &kp HOME/END/CAPS/DELETE など: 基本的な編集・ナビゲーション操作
+//             bindings = <
+// &trans  &kp ESC     &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0  &kp HOME  &trans    &kp UP    &trans     &trans  &trans
+// &trans  &kp CAPS    &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp AT           &kp END   &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans
+// &trans  &kp DELETE  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp DOT          &trans    &trans    &trans    &trans     &trans  &trans
+//                                      &trans           &trans           &trans           &trans    &trans    &trans
+//             >;
+//         };
 
         layer_3 {
 // -------------------------------------------------------------------------------------------------------------------------------------------------
